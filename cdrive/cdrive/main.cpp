@@ -49,7 +49,7 @@ int main(int argc, const char * argv[]) {
         std::cout << "Please, enter the code:";
         std::cin >> code;
         
-        Credential credential(gdc.requestTokens(code));
+        Credential credential(gdc.requestCredential(code));
     } catch (int ex) {
         std::cerr << ex << std::endl;
     }

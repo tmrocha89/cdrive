@@ -54,7 +54,7 @@ std::string GoogleDriveCode::getCodeUrl() const{
 }
 
 
-Credential GoogleDriveCode::requestTokens(std::string code){
+Credential GoogleDriveCode::requestCredential(std::string code){
     CURL* curl;
     CURLcode resCode;
     /*

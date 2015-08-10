@@ -19,10 +19,12 @@ private:
     std::string jsonText;
     
     CPPUNIT_TEST_SUITE(TestGoogleDriveCode);
-    CPPUNIT_TEST(testConstructor);
+    CPPUNIT_TEST(testGetCodeUrl);
+    CPPUNIT_TEST(testRequestCredential);
     CPPUNIT_TEST_SUITE_END();
     
-    void testConstructor();
+    void testGetCodeUrl();
+    void testRequestCredential();
 
 };
 

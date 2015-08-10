@@ -34,7 +34,7 @@ public:
     
     std::string getCodeUrl() const;
     
-    Credential requestTokens(std::string code);
+    Credential requestCredential(std::string code);
     
     
 };

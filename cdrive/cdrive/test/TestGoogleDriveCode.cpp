@@ -10,6 +10,10 @@ void TestGoogleDriveCode::tearDown(){
     
 }
 
-void TestGoogleDriveCode::testConstructor(){
+void TestGoogleDriveCode::testGetCodeUrl(){
     CPPUNIT_ASSERT_ASSERTION_FAIL(true);
+}
+
+void TestGoogleDriveCode::testRequestCredential(){
+     CPPUNIT_ASSERT_ASSERTION_FAIL(true);
 }

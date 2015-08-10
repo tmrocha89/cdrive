@@ -36,7 +36,7 @@ public:
         @param[in]  code is the code that user get from google
      
      */
-    virtual Credential requestTokens(std::string code) =0;
+    virtual Credential requestCredential(std::string code) =0;
 };
 
 
