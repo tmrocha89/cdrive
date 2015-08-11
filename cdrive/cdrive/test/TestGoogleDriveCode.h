@@ -4,6 +4,9 @@
 #include <iostream>
 #include <cppunit/TestCase.h>
 #include <cppunit/extensions/HelperMacros.h>
+#include <string>
+#include <regex>
+#include "GoogleDriveCode.h"
 
 class TestGoogleDriveCode : public CppUnit::TestFixture{
     

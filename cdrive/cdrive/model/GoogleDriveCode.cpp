@@ -13,11 +13,14 @@ GoogleDriveCode::~GoogleDriveCode(){}
 
 
 size_t GoogleDriveCode::getUrlCode(void *ptr, size_t size, size_t nmemb, void *userdata){
-    std::string url ((char*)ptr);
-    size_t s = url.find("Location");
+    std::string temp ((char*)ptr);
+    size_t s = temp.find("Location");
     if(s != std::string::npos){
-        url.erase(0, strlen("Location: "));
-        std::cout << url << std::endl;
+        std::ostringstream* stream = (std::ostringstream*)userdata;
+        temp.erase(0, strlen("Location: "));
+        stream->write(temp.c_str(), temp.size());
+        //std::cout << temp << std::endl;
+        //GoogleDriveCode::url = temp;
     }
     return size * nmemb;
 }
@@ -25,6 +28,7 @@ size_t GoogleDriveCode::getUrlCode(void *ptr, size_t size, size_t nmemb, void *u
 std::string GoogleDriveCode::getCodeUrl() const{
     CURL* curl;
     CURLcode resCode;
+    std::ostringstream urlstream;
     
     std::ostringstream postStream;
     postStream << "scope=email profile https://www.googleapis.com/auth/drive&redirect_uri="<< REDIRECT_URI <<"&response_type=code&client_id=" << CLIENT_ID;
@@ -40,9 +44,9 @@ std::string GoogleDriveCode::getCodeUrl() const{
         curl_easy_setopt(curl, CURLOPT_FOLLOWLOCATION, 1);
         curl_easy_setopt(curl, CURLOPT_HEADER, 1);
         curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, getUrlCode);
+        curl_easy_setopt(curl, CURLOPT_WRITEDATA, &urlstream);
         resCode = curl_easy_perform(curl); //couldn resolve host: code 6
         curl_easy_cleanup(curl);
-        
         if (resCode!= CURLcode::CURLE_OK)
             throw 99;
         
@@ -50,11 +54,11 @@ std::string GoogleDriveCode::getCodeUrl() const{
         throw 99;
     }
     
-    return "ola";
+    return urlstream.str();
 }
 
 
-Credential GoogleDriveCode::requestCredential(std::string code){
+Credential GoogleDriveCode::requestCredential(const std::string& code){
     CURL* curl;
     CURLcode resCode;
     /*
@@ -83,3 +87,4 @@ Credential GoogleDriveCode::requestCredential(std::string code){
         throw 99;
     }
 }
+

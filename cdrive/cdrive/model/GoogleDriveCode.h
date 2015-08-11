@@ -26,7 +26,7 @@ private:
     const static std::string DRIVE_URL;
     
     static size_t getUrlCode(void *ptr, size_t size, size_t nmemb, void *userdata);
-    
+
 public:
     
     GoogleDriveCode();
@@ -34,7 +34,7 @@ public:
     
     std::string getCodeUrl() const;
     
-    Credential requestCredential(std::string code);
+    Credential requestCredential(const std::string& code);
     
     
 };

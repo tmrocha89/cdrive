@@ -27,7 +27,7 @@ public:
      
         @return A string, a url for getting the code
      */
-    virtual std::string getCodeUrl() const =0;
+    virtual std::string getCodeUrl() const=0;
     
     /**
         This method will get the code and will request
@@ -36,7 +36,7 @@ public:
         @param[in]  code is the code that user get from google
      
      */
-    virtual Credential requestCredential(std::string code) =0;
+    virtual Credential requestCredential(const std::string& code) =0;
 };
 
 
