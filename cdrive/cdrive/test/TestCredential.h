@@ -33,12 +33,14 @@ private:
     CPPUNIT_TEST(testGetToken);
     CPPUNIT_TEST(testGetRefreshToken);
     CPPUNIT_TEST(testGetTokenID);
+    CPPUNIT_TEST(testEqualObjects);
     CPPUNIT_TEST_SUITE_END();
     
     void testConstructor();
     void testGetToken();
     void testGetRefreshToken();
     void testGetTokenID();
+    void testEqualObjects();
 };
 
 CPPUNIT_TEST_SUITE_REGISTRATION(TestCredential);
