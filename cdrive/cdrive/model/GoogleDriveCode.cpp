@@ -12,15 +12,21 @@ GoogleDriveCode::GoogleDriveCode(){}
 GoogleDriveCode::~GoogleDriveCode(){}
 
 
+
+size_t GoogleDriveCode::getTokensJson(void *ptr, size_t size, size_t nmemb, void *userdata){
+    std::string temp ((char*)ptr);
+    std::ostringstream* out = (std::ostringstream*) userdata;
+    out->write(temp.c_str(), temp.size());
+    return size * nmemb;
+}
+
 size_t GoogleDriveCode::getUrlCode(void *ptr, size_t size, size_t nmemb, void *userdata){
     std::string temp ((char*)ptr);
     size_t s = temp.find("Location");
     if(s != std::string::npos){
         std::ostringstream* stream = (std::ostringstream*)userdata;
         temp.erase(0, strlen("Location: "));
-        stream->write(temp.c_str(), temp.size());
-        //std::cout << temp << std::endl;
-        //GoogleDriveCode::url = temp;
+        stream->write(temp.c_str(), temp.size()-2); //'-2' to remove \n\r
     }
     return size * nmemb;
 }
@@ -61,6 +67,7 @@ std::string GoogleDriveCode::getCodeUrl() const{
 Credential GoogleDriveCode::requestCredential(const std::string& code){
     CURL* curl;
     CURLcode resCode;
+    std::ostringstream outsream;
     /*
      * Get Tokens
      */
@@ -71,18 +78,21 @@ Credential GoogleDriveCode::requestCredential(const std::string& code){
     std::string postFiledsToken = postStreamTokens.str();
     curl = curl_easy_init();
     if(curl){
-    curl_easy_setopt(curl, CURLOPT_URL, TOKEN_URI.c_str());
-    curl_easy_setopt(curl, CURLOPT_POSTFIELDS, postFiledsToken.c_str());
-    resCode = curl_easy_perform(curl);
-    curl_easy_cleanup(curl);
-    
-    if (resCode!=CURLcode::CURLE_OK)
-        throw resCode;
-    else
-        std::cout << "correu tudo bem" << std::endl;
-    
-    Credential c(code);
-    return c;
+        curl_easy_setopt(curl, CURLOPT_URL, TOKEN_URI.c_str());
+        curl_easy_setopt(curl, CURLOPT_POSTFIELDS, postFiledsToken.c_str());
+        curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, getTokensJson);
+        curl_easy_setopt(curl, CURLOPT_WRITEDATA, &outsream);
+        resCode = curl_easy_perform(curl);
+        curl_easy_cleanup(curl);
+        
+        if (resCode!=CURLcode::CURLE_OK)
+            throw resCode;
+        else
+            std::cout << "correu tudo bem" << std::endl;
+        
+        
+        Credential c(outsream.str());
+        return c;
     }else{
         throw 99;
     }

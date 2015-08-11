@@ -22,5 +22,12 @@ void TestGoogleDriveCode::testGetCodeUrl(){
 }
 
 void TestGoogleDriveCode::testRequestCredential(){
-     CPPUNIT_ASSERT_ASSERTION_FAIL(false);
+    /*
+    GoogleDriveCode gdc;
+    std::string url = gdc.getCodeUrl();
+    std::string code;
+    std::cout << "Code: ";std::cin >> code;
+    Credential credential = gdc.requestCredential(code);
+    */
+    CPPUNIT_ASSERT_ASSERTION_FAIL(false);
 }

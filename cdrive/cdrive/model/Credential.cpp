@@ -3,7 +3,6 @@
 Credential::Credential(){}
 
 Credential::Credential(std::string webpage){
-    Credential::Credential();
     rapidjson::Document document;
     document.Parse(webpage.c_str());
     rapidjson::Document* doc = &document;

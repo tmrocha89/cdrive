@@ -45,6 +45,9 @@ int main(int argc, const char * argv[]) {
         GoogleDriveCode gdc;
         std::string url(gdc.getCodeUrl());
         
+        std::cout << "Please, enter in this website and copy and paste the code here.\n"
+                    << url << std::endl;
+        
         std::string code;
         std::cout << "Please, enter the code:";
         std::cin >> code;

@@ -26,7 +26,7 @@ private:
     const static std::string DRIVE_URL;
     
     static size_t getUrlCode(void *ptr, size_t size, size_t nmemb, void *userdata);
-
+    static size_t getTokensJson(void *ptr, size_t size, size_t nmemb, void *userdata);
 public:
     
     GoogleDriveCode();
