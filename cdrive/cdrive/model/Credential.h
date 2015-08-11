@@ -98,7 +98,7 @@ public:
      */
     const std::string getTokenID() const;
     
-    
+    friend bool operator==(const Credential& c1, const Credential& c2);
 
 };
 

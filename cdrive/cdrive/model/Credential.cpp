@@ -85,3 +85,28 @@ void Credential::pullRefreshToken(rapidjson::Document &doc){
     rapidjson::Value &refToken = doc[credentialTypesName[CredentialType::REFRESH_TOKEN]];
     credentials.insert(std::make_pair(CredentialType::REFRESH_TOKEN, refToken.GetString()));
 }
+
+
+bool operator==(const Credential &c1, const Credential& c2){
+    std::string c1AccToken = c1.credentials.at(Credential::CredentialType::ACCESS_TOKEN);
+    std::string c2AccToken = c2.credentials.at(Credential::CredentialType::ACCESS_TOKEN);
+    if (c1AccToken != c2AccToken) return false;
+    
+    std::string c1TokenType = c1.credentials.at(Credential::CredentialType::TOKEN_TYPE);
+    std::string c2TokenType = c2.credentials.at(Credential::CredentialType::TOKEN_TYPE);
+    if (c1AccToken != c2TokenType) return false;
+    
+    std::string c1Expires = c1.credentials.at(Credential::CredentialType::EXPIRES_IN);
+    std::string c2Expires = c2.credentials.at(Credential::CredentialType::EXPIRES_IN);
+    if (c1Expires != c2Expires) return false;
+    
+    std::string c1ID = c1.credentials.at(Credential::CredentialType::ID_TOKEN);
+    std::string c2ID = c2.credentials.at(Credential::CredentialType::ID_TOKEN);
+    if (c1ID != c2ID)   return false;
+    
+    std::string c1Refresh = c1.credentials.at(Credential::CredentialType::REFRESH_TOKEN);
+    std::string c2Refresh = c2.credentials.at(Credential::CredentialType::REFRESH_TOKEN);
+    if (c1Refresh != c2Refresh) return false;
+    
+    return true;
+}
