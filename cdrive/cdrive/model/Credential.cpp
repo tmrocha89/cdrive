@@ -13,6 +13,18 @@ Credential::Credential(std::string webpage){
     pullTokenType(*doc);
 }
 
+Credential::Credential(const std::string& accessToken, const std::string& tokenType,
+                       const std::string& expiresIn, const std::string& idToken,
+                       const std::string& refreshToken):credentials(){
+    
+    credentials.insert(std::make_pair(CredentialType::ACCESS_TOKEN, accessToken));
+    credentials.insert(std::make_pair(CredentialType::TOKEN_TYPE, tokenType));
+    credentials.insert(std::make_pair(CredentialType::EXPIRES_IN, expiresIn));
+    credentials.insert(std::make_pair(CredentialType::ID_TOKEN, idToken));
+    credentials.insert(std::make_pair(CredentialType::REFRESH_TOKEN, refreshToken));
+    
+}
+
 Credential::~Credential(){}
 
 std::string Credential::getToken()const{

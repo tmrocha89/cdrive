@@ -59,6 +59,22 @@ public:
      */
     Credential(std::string webpage);
     
+    /**
+        Complete Constructor
+     
+        @param[in] accessToken Access Token
+        @param[in] tokenType    Token Type, generally 'Bearer'
+        @param[in] expiresIn    Time when token will expire
+        @param[in] idToken      Token's ID
+        @param[in] refreshToken Refresh Token
+     */
+    Credential(const std::string& accessToken, const std::string& tokenType,
+               const std::string& expiresIn, const std::string& idToken,
+               const std::string& refreshToken);
+    
+    /**
+        Destructor
+     */
     ~Credential();
     
     /**
