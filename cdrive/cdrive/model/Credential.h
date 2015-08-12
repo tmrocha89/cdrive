@@ -72,6 +72,9 @@ public:
                const std::string& expiresIn, const std::string& idToken,
                const std::string& refreshToken);
     
+    
+    Credential(const Credential&);
+    
     /**
         Destructor
      */

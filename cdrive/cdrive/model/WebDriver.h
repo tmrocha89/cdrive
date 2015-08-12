@@ -3,13 +3,15 @@
 
 #include <iostream>
 #include "File.h"
+#include "Credential.h"
 
 class WebDriver{
     
 private:
+    Credential credential;
     
 public:
-    WebDriver();
+    WebDriver(const Credential& );
     ~WebDriver();
     
     cdrive::File* getFile();

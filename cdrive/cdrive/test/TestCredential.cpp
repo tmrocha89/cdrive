@@ -20,6 +20,14 @@ void TestCredential::testConstructor(){
     Credential credential(jsonText);
 }
 
+void TestCredential::testConstructorCopy(){
+    
+    Credential c1(jsonText);
+    Credential c2(c1);
+    
+    CPPUNIT_ASSERT_EQUAL(true, c1==c2);
+}
+
 void TestCredential::testGetToken(){
     std::string expRes = "ya29.ywFKZHlOuJI2YhtvuX-VGX88gi3JDbf6QIiP53qAndUvO1yMkWaAGmxLPSIyK_F9cA43";
     Credential c(jsonText);

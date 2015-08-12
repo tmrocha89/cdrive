@@ -30,6 +30,7 @@ private:
     
     CPPUNIT_TEST_SUITE(TestCredential);
     CPPUNIT_TEST(testConstructor);
+    CPPUNIT_TEST(testConstructorCopy);
     CPPUNIT_TEST(testGetToken);
     CPPUNIT_TEST(testGetRefreshToken);
     CPPUNIT_TEST(testGetTokenID);
@@ -37,6 +38,7 @@ private:
     CPPUNIT_TEST_SUITE_END();
     
     void testConstructor();
+    void testConstructorCopy();
     void testGetToken();
     void testGetRefreshToken();
     void testGetTokenID();

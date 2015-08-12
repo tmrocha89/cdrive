@@ -25,6 +25,13 @@ Credential::Credential(const std::string& accessToken, const std::string& tokenT
     
 }
 
+Credential::Credential(const Credential& cre){
+    for(std::map<CredentialType, std::string>::const_iterator cit = cre.credentials.cbegin();
+        cit != cre.credentials.cend(); cit++){
+        this->credentials.insert(std::make_pair(cit->first, cit->second));
+    }
+}
+
 Credential::~Credential(){}
 
 std::string Credential::getToken()const{
@@ -94,7 +101,7 @@ bool operator==(const Credential &c1, const Credential& c2){
     
     std::string c1TokenType = c1.credentials.at(Credential::CredentialType::TOKEN_TYPE);
     std::string c2TokenType = c2.credentials.at(Credential::CredentialType::TOKEN_TYPE);
-    if (c1AccToken != c2TokenType) return false;
+    if (c1TokenType != c2TokenType) return false;
     
     std::string c1Expires = c1.credentials.at(Credential::CredentialType::EXPIRES_IN);
     std::string c2Expires = c2.credentials.at(Credential::CredentialType::EXPIRES_IN);
