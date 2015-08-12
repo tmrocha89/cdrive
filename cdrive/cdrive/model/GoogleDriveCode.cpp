@@ -37,6 +37,9 @@ std::string GoogleDriveCode::getCodeUrl() const{
     std::ostringstream urlstream;
     
     std::ostringstream postStream;
+    /*
+    postStream << "scope=email profile https://www.googleapis.com/auth/drive&redirect_uri="<< REDIRECT_URI <<"&response_type=code&client_id=" << CLIENT_ID;
+*/
     postStream << "scope=email profile https://www.googleapis.com/auth/drive&redirect_uri="<< REDIRECT_URI <<"&response_type=code&client_id=" << CLIENT_ID;
     std::string postFields = postStream.str();
     
@@ -86,10 +89,7 @@ Credential GoogleDriveCode::requestCredential(const std::string& code){
         curl_easy_cleanup(curl);
         
         if (resCode!=CURLcode::CURLE_OK)
-            throw resCode;
-        else
-            std::cout << "correu tudo bem" << std::endl;
-        
+            throw resCode;        
         
         Credential c(outsream.str());
         return c;

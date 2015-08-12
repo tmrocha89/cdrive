@@ -2,6 +2,8 @@
 #define __cdrive__WebDriver__
 
 #include <iostream>
+#include <sstream>
+#include <curl/curl.h>
 #include "File.h"
 #include "Credential.h"
 
@@ -14,7 +16,7 @@ public:
     WebDriver(const Credential& );
     ~WebDriver();
     
-    cdrive::File* getFile();
+    void listFiles();
     
     
 };

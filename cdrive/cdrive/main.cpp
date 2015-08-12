@@ -3,7 +3,7 @@
 #include <curl/curl.h>
 #include <string.h>
 #include "GoogleDriveCode.h"
-
+#include "WebDriver.h"
 
 #ifdef DEBUG
 #include <cppunit/BriefTestProgressListener.h>
@@ -53,6 +53,8 @@ int main(int argc, const char * argv[]) {
         std::cin >> code;
         
         Credential credential(gdc.requestCredential(code));
+        WebDriver wd(credential);
+        wd.listFiles();
     } catch (int ex) {
         std::cerr << ex << std::endl;
     }
